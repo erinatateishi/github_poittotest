@@ -1,4 +1,4 @@
-Write-Host "デプロイ完了確認中..."
+﻿Write-Host "デプロイ完了確認中..."
 $maxRetries = 10
 $url = 'http://localhost/'
 
@@ -9,8 +9,7 @@ for ($i = 0; $i -lt $maxRetries; $i++) {
             Write-Host "サイトが正常に応答しています。"
             exit 0
         }
-    }
-    catch {
+    } catch {
         Write-Host "応答なし、再試行します... ($i)"
     }
     Start-Sleep -Seconds 5
