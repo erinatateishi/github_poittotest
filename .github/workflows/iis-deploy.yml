@@ -7,59 +7,44 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # ローカルPCのセルフホストランナーを使う
+    runs-on: self-hosted
 
     steps:
       - name: ソースコードを取得
         uses: actions/checkout@v3
 
       - name: ソースコードをローカルフォルダにコピー
+        shell: cmd
         run: |
-          echo ソースを D:\Project\demo にコピー中...
-          xcopy /E /Y . D:\Project\demo
+          echo ソースを D:\Project\demo_dev にコピー中...
+          xcopy /E /Y . D:\Project\demo_dev
 
       - name: アプリケーションをビルド
-        run: |
-          call D:\Project\demo\build.bat
+        shell: cmd
+        run: call D:\Project\demo_dev\build.bat
 
       - name: IIS サイトを停止
+        shell: powershell
         run: |
-          echo IIS サイトを停止中...
-          powershell.exe -Command "Stop-WebSite -Name 'demo'"
+          Write-Host "IIS サイトを停止中..."
+          Stop-WebSite -Name 'demo'
 
       - name: デプロイ（ファイルをコピー）
+        shell: cmd
         run: |
           echo ファイルをIISサイトにコピー中...
           xcopy /E /Y D:\Project\demo\* "C:\inetpub\osafw-asp.net-master\www"
 
       - name: IIS サイトを開始
+        shell: powershell
         run: |
-          echo IIS サイトを起動中...
-          powershell.exe -Command "Start-WebSite -Name 'demo'"
+          Write-Host "IIS サイトを起動中..."
+          Start-WebSite -Name 'demo'
 
       - name: デプロイ完了確認（HTTPステータスチェック）
-        run: |
-          echo デプロイ完了確認中...
-          powershell -Command "
-            $maxRetries = 10
-            $url = 'http://localhost/'
-            for ($i = 0; $i -lt $maxRetries; $i++) {
-              try {
-                $res = Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 5
-                if ($res.StatusCode -eq 200) {
-                  Write-Host 'サイトが正常に応答しています。'
-                  exit 0
-                }
-              } catch {
-                Write-Host '応答なし、再試行します...'
-              }
-              Start-Sleep -Seconds 5
-            }
-            Write-Error 'デプロイ確認に失敗しました。'
-            exit 1
-          "
+        shell: powershell
+        run: powershell -ExecutionPolicy Bypass -File ./scripts/check-deploy.ps1
 
       - name: テストツール実行
-        run: |
-          echo テストツールを実行中...
-          call C:\CAC\PoiTest.bat
+        shell: cmd
+        run: call C:\CAC\PoiTest.bat
