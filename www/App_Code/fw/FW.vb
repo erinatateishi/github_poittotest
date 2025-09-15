@@ -868,7 +868,7 @@ Public Class FW
     Public Sub redirect(ByVal url As String, Optional is_exception As Boolean = True)
         If Regex.IsMatch(url, "^/") Then url = Me.config("ROOT_URL") & url
         resp.Redirect(url, False)
-        If is_exception Then Throw New RedirectException
+        '    If is_exception Then Throw New RedirectException
     End Sub
 
     Public Overloads Sub routeRedirect(ByVal action As String, ByVal controller As String, Optional ByVal args As Object = Nothing)
