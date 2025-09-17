@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set SLN_PATH=D:\Project\demo\osafw\osafw.sln
+set SLN_PATH=D:\Project\demo_dev\www\www.sln
 set MSBUILD_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe"
 
 echo [INFO] MSBuildを実行中...
