@@ -16,8 +16,8 @@ jobs:
       - name: ソースコードをローカルフォルダにコピー
         shell: cmd
         run: |
-          echo ソースを D:\Project\demo にコピー中...
-          xcopy /E /Y . D:\Project\demo
+          echo ソースを D:\Project\demo_dev にコピー中...
+          xcopy /E /Y . D:\Project\demo_dev
 
       - name: アプリケーションをビルド
         shell: cmd
