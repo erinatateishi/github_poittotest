@@ -8,7 +8,7 @@ echo [INFO] MSBuildを実行中...
 %MSBUILD_PATH% %SLN_PATH% /p:Configuration=Release /m
 
 if %errorlevel% neq 0 (
-    echo [ERROR] ビルド失敗4
+    echo [ERROR] ビルド失敗
     exit /b 1
 )
 
