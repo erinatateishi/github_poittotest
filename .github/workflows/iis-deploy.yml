@@ -19,7 +19,7 @@ jobs:
         shell: cmd
         run: |
           echo ソースを D:\Project\demo_dev にコピー中...
-          robocopy "." "D:\Project\demo_dev" /COPY:DAT /H /E /XD .vs .git .github
+          robocopy "." "D:\Project\demo_dev" /COPY:DAT /E /XD .vs .git .github
 
       - name: アプリケーションをビルド
         shell: cmd
