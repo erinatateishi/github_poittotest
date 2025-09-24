@@ -29,6 +29,7 @@ jobs:
         shell: powershell
         run: |
           Write-Host "IIS サイトを停止中..."
+          $OutputEncoding = [System.Text.UTF8Encoding]::new()
           Stop-WebSite -Name 'demo'
 
       - name: デプロイ（ファイルをコピー）
