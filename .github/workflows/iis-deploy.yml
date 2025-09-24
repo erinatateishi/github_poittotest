@@ -35,7 +35,8 @@ jobs:
         shell: cmd
         run: |
           echo ファイルをIISサイトにコピー中...
-          xcopy /E /Y "D:\Project\demo_dev\www" "C:\inetpub\osafw-asp.net-master\www"
+          xcopy /E /Y "D:\Project\demo_dev\www\App_Code" "C:\inetpub\osafw-asp.net-master\www\App_Code"
+          xcopy /E /Y "D:\Project\demo_dev\www\App_Data" "C:\inetpub\osafw-asp.net-master\www\App_Data"
 
       - name: IIS サイトを開始
         shell: powershell
