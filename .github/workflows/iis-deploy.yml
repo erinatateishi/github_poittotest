@@ -30,7 +30,7 @@ jobs:
         run: |
           Write-Host "IIS サイトを停止中..."
           Stop-WebSite -Name 'demo' *> $null
-          Write-Host "IIS サイト停止完了"
+          Write-Host "IIS サイトを停止完了..."
 
       - name: デプロイ（ファイルをコピー）
         shell: cmd
@@ -44,7 +44,7 @@ jobs:
         run: |
           Write-Host "IIS サイトを起動中..."
           Start-WebSite -Name 'demo' *> $null
-          Write-Host "IIS サイト起動完了"
+          Write-Host "IIS サイト起動完了..."
 
       - name: デプロイ完了確認（HTTPステータスチェック）
         shell: powershell
